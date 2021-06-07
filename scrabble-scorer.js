@@ -79,6 +79,8 @@ let scrabbleScore = function(word) {
 	return score;
 };
 
+// Even though assignment instructions has key name "scorerFunction", grading/Jasmine looks for scoringFunction
+
 const scoringAlgorithms = [
   {
     name: 'Simple Score',
@@ -123,10 +125,7 @@ function transform(pointsObj) {
     for (let j = 0; j < pointsObj[oldPointsArr[i]].length; ++j) {
       let letter = pointsObj[oldPointsArr[i]][j].toLowerCase();
       newPointObj[letter] = Number(oldPointsArr[i]);
-
-      // console.log(oldPointsArr[i] + ": " + pointsObj[oldPointsArr[i]][j]);
     }
-    // console.log();
   }
 
   return newPointObj;
@@ -139,12 +138,6 @@ function runProgram() {
   let scorerChoice = scorerPrompt();
 
   console.log(`Score for '${word}': ${scoringAlgorithms[scorerChoice].scoringFunction(word)}`);
-  // console.log(newPointStructure);
-  // console.log(oldPointStructure);
-  // console.log(oldScrabbleScorer(word));
-  // console.log(`simple score = ${simpleScore(word)}`);
-  // console.log(`vowelBonusScore = ${vowelBonusScore(word)}`);
-  //console.log(scoringAlgorithms[0].description);
 }
 
 // Don't write any code below this line //
