@@ -99,6 +99,8 @@ function scorerPrompt() {
   while (scorer !== 0 && scorer !== 1 && scorer !== 2) {
     scorer = Number(input.question("Enter 0, 1, or 2: "));
   }
+
+  return scorer;
 }
 
 function transform() {};
@@ -107,7 +109,9 @@ let newPointStructure;
 
 function runProgram() {
   let word = initialPrompt();
-  scorerPrompt();
+  let scorerChoice = scorerPrompt();
+
+  console.log(`Score for '${word}': ${scoringAlgorithms[scorerChoice].scorerFunction(word)}`);
   // console.log(oldScrabbleScorer(word));
   // console.log(`simple score = ${simpleScore(word)}`);
   // console.log(`vowelBonusScore = ${vowelBonusScore(word)}`);
