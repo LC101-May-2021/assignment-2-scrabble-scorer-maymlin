@@ -70,7 +70,7 @@ let vowelBonusScore = function(word){
 };
 
 let scrabbleScore = function(word) {
-  word = word.trim().split(" ").join("").toUpperCase();
+  word = word.trim().split(" ").join("").toLowerCase();
   let score = 0;
  
 	for (let i = 0; i < word.length; i++) {
@@ -121,7 +121,8 @@ function transform(pointsObj) {
   
   for (let i = 0; i < oldPointsArr.length; ++i) {
     for (let j = 0; j < pointsObj[oldPointsArr[i]].length; ++j) {
-      newPointObj[pointsObj[oldPointsArr[i]][j]] = Number(oldPointsArr[i]);
+      let letter = pointsObj[oldPointsArr[i]][j].toLowerCase();
+      newPointObj[letter] = Number(oldPointsArr[i]);
 
       // console.log(oldPointsArr[i] + ": " + pointsObj[oldPointsArr[i]][j]);
     }
