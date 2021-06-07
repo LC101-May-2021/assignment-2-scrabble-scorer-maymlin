@@ -89,7 +89,17 @@ const scoringAlgorithms = [
   }
 ];
 
-function scorerPrompt() {}
+function scorerPrompt() {
+  let scorer;
+  
+  console.log(
+    "Which scoring algorithm would you like to use?\n\n" + "0 - Simple: One point per character\n" + "1 - Vowel Bonus: Vowels are worth 3 points\n" + "2 - Scrabble: Uses scrabble point system"
+  );
+  
+  while (scorer !== 0 && scorer !== 1 && scorer !== 2) {
+    scorer = Number(input.question("Enter 0, 1, or 2: "));
+  }
+}
 
 function transform() {};
 
@@ -97,6 +107,7 @@ let newPointStructure;
 
 function runProgram() {
   let word = initialPrompt();
+  scorerPrompt();
   // console.log(oldScrabbleScorer(word));
   // console.log(`simple score = ${simpleScore(word)}`);
   // console.log(`vowelBonusScore = ${vowelBonusScore(word)}`);
