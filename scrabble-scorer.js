@@ -20,10 +20,9 @@ function oldScrabbleScorer(word) {
  
 	  for (const pointValue in oldPointStructure) {
  
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-		 }
- 
+		  if (oldPointStructure[pointValue].includes(word[i])) {
+			  letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+		  }
 	  }
 	}
 	return letterPoints;
@@ -37,26 +36,28 @@ function checkNumeric(word) {
 }
 
 function initialPrompt() {
-   let word = input.question("Let's play some scrabble!\n\nEnter a word to score: ");
-
-   return word;
- }
+  let word = "";
+    
+  while (!word || checkNumeric(word)) {
+   if (checkNumeric(word)) {
+    console.log("Please enter a valid word.\n");
+  }
+    word = input.question("Let's play some scrabble!\n\nEnter a word to score: ");   
+  }
+  
+  return word;
+}
 
 let simpleScore = function(word){
   word = word.trim().split(" ").join("");
-  if (checkNumeric(word)) {
-    return `0. Invalid word entered.`;
-  }
+
   return word.length;
 };
 
 let vowelBonusScore = function(word){
-  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  // let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let vowels = "aeiou";
   let score = 0;
-
-  if (checkNumeric(word)) {
-    return `0. Invalid word entered.`;
-  }
 
   for (let i = 0; i < word.length; i++) {
     if (vowels.includes(word[i])) {
@@ -120,7 +121,7 @@ function transform(pointsObj) {
   for (point in pointsObj) {
     oldPointsArr.push(point);
   }
-  
+
   for (let i = 0; i < oldPointsArr.length; ++i) {
     for (let j = 0; j < pointsObj[oldPointsArr[i]].length; ++j) {
       let letter = pointsObj[oldPointsArr[i]][j].toLowerCase();
@@ -130,6 +131,20 @@ function transform(pointsObj) {
 
   return newPointObj;
 };
+
+// Alternate transform function
+/* function transform(pointsObj) {
+  let newPointObj = {};
+
+  for (const [pointValue, letters] of Object.entries(pointsObj)) {
+    for (letter of letters) {
+      newPointObj[letter.toLowerCase()] = Number(pointValue);
+    }
+  }
+  
+  return newPointObj;
+} */
+
 
 let newPointStructure = transform(oldPointStructure);
 
